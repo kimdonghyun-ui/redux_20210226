@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import './index.css';
@@ -8,8 +8,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import rootReducer from './modules';
+import { createLogger } from 'redux-logger';
 
-const store = createStore(rootReducer, composeWithDevTools());
+const logger = createLogger();
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(logger)),
+);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,7 +23,7 @@ ReactDOM.render(
       <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function
