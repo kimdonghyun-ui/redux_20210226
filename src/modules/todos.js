@@ -3,33 +3,31 @@ const INSERT = 'todos/INSERT';
 const TOGGLE = 'todos/TOGGLE';
 const REMOVE = 'todos/REMOVE';
 
-
-export const changeInput = input => ({
+export const changeInput = (input) => ({
   type: CHANGE_INPUT,
-  input
+  input,
 });
 
 let id = 3;
 
-export const insert = text => ({
+export const insert = (text) => ({
   type: INSERT,
   todo: {
     id: id++,
     text,
-    done:false
-  }
+    done: false,
+  },
 });
 
-export const toggle = id => ({
+export const toggle = (id) => ({
   type: TOGGLE,
-  id
+  id,
 });
 
-export const remove = id => ({
+export const remove = (id) => ({
   type: REMOVE,
-  id
+  id,
 });
-
 
 const initialState = {
   input: '',
@@ -37,41 +35,41 @@ const initialState = {
     {
       id: 1,
       text: '리덕스 기초 배우기',
-      done:true
+      done: true,
     },
     {
       id: 2,
       text: '리액트와 리덕스 사용하기',
-      done:false
-    }
-  ]
-}
+      done: false,
+    },
+  ],
+};
 
-function todos(state = initialState, action)
-{
+function todos(state = initialState, action) {
   switch (action.type) {
     case CHANGE_INPUT:
       return {
         ...state,
-        input: action.input
+        input: action.input,
       };
     case INSERT:
       return {
         ...state,
-        todos: state.todos.concat(action.todo)
+        todos: state.todos.concat(action.todo),
       };
-
 
     case TOGGLE:
       return {
         ...state,
-        todos: state.todos.map(todo => todo.id ===action.id ? {...todo, done: !todo.done} : todo)
+        todos: state.todos.map((todo) =>
+          todo.id === action.id ? { ...todo, done: !todo.done } : todo,
+        ),
       };
 
     case REMOVE:
       return {
         ...state,
-        todos: state.todos.filter(todo => todo.id !== action.id)
+        todos: state.todos.filter((todo) => todo.id !== action.id),
       };
 
     default:
@@ -79,9 +77,4 @@ function todos(state = initialState, action)
   }
 }
 
-
 export default todos;
-
-
-
-

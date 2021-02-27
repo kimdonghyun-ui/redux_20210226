@@ -15,7 +15,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   increase: () => {
     console.log('increase');
-    dispatch(increase(100));
+    dispatch(increase());
   },
   decrease: () => {
     console.log('decrease');
